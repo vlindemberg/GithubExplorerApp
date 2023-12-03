@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GithubExplorerApp</string>
+    <string name="log_in_with_github">Log in with GitHub</string>
+    <string name="nav_menu_following">Seguindo</string>
+    <string name="nav_menu_repositories">Repositórios</string>
+    <string name="nav_menu_profile">Perfil</string>
+    <string name="authentication_title">Entre com sua conta do Github</string>
+    <string name="sing_in_button">Entrar</string>
+    <string name="profile_logout">Sair</string>
+    <string name="following_title">Seguindo</string>
+    <string name="following_name">Vinícius Azevedo</string>
+    <string name="back_button">Voltar a Pagina</string>
+    <string name="my_repositories">Meus repositórios</string>
+    <string name="create_repo">Criar repositório</string>
+</resources>

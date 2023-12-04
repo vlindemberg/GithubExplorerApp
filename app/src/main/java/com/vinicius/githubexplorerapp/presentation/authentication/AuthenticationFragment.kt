@@ -18,17 +18,8 @@ import androidx.navigation.fragment.findNavController
 import com.vinicius.githubexplorerapp.BuildConfig
 import com.vinicius.githubexplorerapp.databinding.FragmentAuthenticationBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import org.json.JSONTokener
-import java.io.OutputStreamWriter
-import java.net.URL
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.HttpsURLConnection
 
 @AndroidEntryPoint
 class AuthenticationFragment : Fragment() {
@@ -54,11 +45,26 @@ class AuthenticationFragment : Fragment() {
             setupGithubWebViewDialog(setupGitAuthUrl())
         }
         lifecycleScope.launch {
-            viewModel.states.collect {
+            viewModel.authStates.collect {
+                setupLoading(it.isLoading)
+                loadUser(it.success, it.token)
+                loadError(it.errorMessage)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.userStates.collect {
                 setupLoading(it.isLoading)
                 loadHome(it.success)
                 loadError(it.errorMessage)
             }
+        }
+    }
+
+    private fun loadHome(success: Boolean) {
+        if (success) {
+            findNavController().navigate(
+                AuthenticationFragmentDirections.actionLoginFragmentToFollowingFragment()
+            )
         }
     }
 
@@ -70,12 +76,9 @@ class AuthenticationFragment : Fragment() {
         }
     }
 
-    private fun loadHome(success: Boolean) {
-        if (success) {
-            findNavController().navigate(
-                AuthenticationFragmentDirections.actionLoginFragmentToFollowingFragment()
-            )
-        }
+    private fun loadUser(success: Boolean, token: String) {
+        if (success)
+            viewModel.getUserWithToken(token)
     }
 
     private fun loadError(errorMessage: String) {

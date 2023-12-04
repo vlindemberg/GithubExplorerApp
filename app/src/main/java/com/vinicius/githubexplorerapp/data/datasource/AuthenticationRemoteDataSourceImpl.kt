@@ -13,6 +13,11 @@ class AuthenticationRemoteDataSourceImpl @Inject constructor(
         code: String,
         redirectUri: String
     ): AuthTokenResponse {
-        return authenticationService.getAuthToken(clientId, clientSecret, code, redirectUri)
+        return authenticationService.getAuthToken(
+            clientId = clientId,
+            clientSecret = clientSecret,
+            code = code,
+            redirectUri = redirectUri
+        )
     }
 }

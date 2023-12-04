@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.vinicius.githubexplorerapp.databinding.FragmentFollowingBinding
+import com.vinicius.githubexplorerapp.util.UserLogged
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,5 +22,16 @@ class FollowingFragment : Fragment() {
     ): View {
         binding = FragmentFollowingBinding.inflate(layoutInflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupProfileAvatar()
+    }
+
+    private fun setupProfileAvatar() {
+        val user = UserLogged.getUserLogged()
+        Glide.with(binding.followingProfileImg).load(user.avatarUrl)
+            .into(binding.followingProfileImg)
     }
 }

@@ -31,7 +31,7 @@ android {
             isShrinkResources = false
             isDebuggable = true
             versionNameSuffix = "-debug"
-            buildConfigField("String", "BASE_URL", project.findProperty("GITHUB_BASE_URL").toString())
+            buildConfigField("String", "BASE_API_URL", project.findProperty("GITHUB_BASE_API_URL").toString())
             buildConfigField("String", "AUTH_URL", project.findProperty("GITHUB_AUTH_URL").toString())
             buildConfigField("String", "TOKEN_URL", project.findProperty("GITHUB_TOKEN_URL").toString())
             buildConfigField("String", "CLIENT_ID", project.findProperty("GITHUB_CLIENT_ID").toString())
@@ -46,7 +46,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BASE_URL", project.findProperty("GITHUB_BASE_URL").toString())
+            buildConfigField("String", "BASE_API_URL", project.findProperty("GITHUB_BASE_API_URL").toString())
             buildConfigField("String", "AUTH_URL", project.findProperty("GITHUB_AUTH_URL").toString())
             buildConfigField("String", "TOKEN_URL", project.findProperty("GITHUB_TOKEN_URL").toString())
             buildConfigField("String", "CLIENT_ID", project.findProperty("GITHUB_CLIENT_ID").toString())

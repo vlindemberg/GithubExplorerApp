@@ -21,9 +21,9 @@
 
     <fragment
         android:id="@+id/followingFragment"
-        android:name="com.vinicius.githubexplorerapp.presentation.following.FollowingFragment"
+        android:name="com.vinicius.githubexplorerapp.presentation.followers.FollowersFragment"
         android:label="fragment_following"
-        tools:layout="@layout/fragment_following">
+        tools:layout="@layout/fragment_followers">
         <action
             android:id="@+id/action_followingFragment_to_repositoriesFragment"
             app:destination="@id/repositoriesFragment"
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/repositoriesFragment"
-        android:name="com.vinicius.githubexplorerapp.presentation.following.RepositoriesFragment"
+        android:name="com.vinicius.githubexplorerapp.presentation.followers.RepositoriesFragment"
         android:label="fragment_repositories"
         tools:layout="@layout/fragment_followers_repositories">
     </fragment>

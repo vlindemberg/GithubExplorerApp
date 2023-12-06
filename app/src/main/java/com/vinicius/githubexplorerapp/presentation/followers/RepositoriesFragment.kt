@@ -1,4 +1,4 @@
-package com.vinicius.githubexplorerapp.presentation.following
+package com.vinicius.githubexplorerapp.presentation.followers
 
 import android.os.Bundle
 import android.view.LayoutInflater

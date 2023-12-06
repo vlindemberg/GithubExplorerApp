@@ -19,10 +19,10 @@ class AuthenticationViewModel @Inject constructor(
     private val getUserInfoUseCase: GetUserInfoUseCase
 ) : ViewModel() {
 
-    private val _authStates = MutableStateFlow(AuthenticationState(isLoading = true))
+    private val _authStates = MutableStateFlow(AuthenticationState(isLoading = false))
     val authStates: StateFlow<AuthenticationState> = _authStates
 
-    private val _userStates = MutableStateFlow(AuthenticationState(isLoading = true))
+    private val _userStates = MutableStateFlow(AuthenticationState(isLoading = false))
     val userStates: StateFlow<AuthenticationState> = _userStates
 
     fun getAuthToken(code: String) {
@@ -30,7 +30,7 @@ class AuthenticationViewModel @Inject constructor(
             runCatching {
                 getAuthTokenUseCase(code)
             }.onSuccess { token ->
-                UserLogged.setAuthToken("Bearer " + token.token)
+                UserLogged.setAuthToken(token.type + " " + token.token)
                 _authStates.update {
                     AuthenticationState(
                         isLoading = false,

@@ -2,21 +2,20 @@ package com.vinicius.githubexplorerapp.presentation.authentication
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.vinicius.githubexplorerapp.BuildConfig
+import com.vinicius.githubexplorerapp.R
 import com.vinicius.githubexplorerapp.databinding.FragmentAuthenticationBinding
+import com.vinicius.githubexplorerapp.util.GithubWebViewClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -71,8 +70,12 @@ class AuthenticationFragment : Fragment() {
     private fun setupLoading(loading: Boolean) {
         if (loading) {
             binding.loginProgress.visibility = View.VISIBLE
+            binding.btnSingIn.text = ""
+            binding.btnSingIn.isClickable = false
         } else {
             binding.loginProgress.visibility = View.GONE
+            binding.btnSingIn.text = resources.getString(R.string.sing_in_button)
+            binding.btnSingIn.isClickable = true
         }
     }
 
@@ -98,37 +101,21 @@ class AuthenticationFragment : Fragment() {
     @SuppressLint("SetJavaScriptEnabled")
     fun setupGithubWebViewDialog(url: String) {
         githubDialog = Dialog(requireContext())
-        val webView = WebView(requireContext())
-        webView.isVerticalScrollBarEnabled = false
-        webView.isHorizontalScrollBarEnabled = false
-        webView.webViewClient = GithubWebViewClient()
-        webView.settings.javaScriptEnabled = true
-        webView.loadUrl(url)
+        val webView = setupWebView(url, githubDialog)
         githubDialog.setContentView(webView)
         githubDialog.show()
     }
 
-    inner class GithubWebViewClient : WebViewClient() {
-        override fun shouldOverrideUrlLoading(
-            view: WebView?,
-            request: WebResourceRequest?
-        ): Boolean {
-            if (request!!.url.toString().startsWith(BuildConfig.REDIRECT_URI)) {
-                handleUrl(request.url.toString())
-                if (request.url.toString().contains("code=")) {
-                    githubDialog.dismiss()
-                }
-                return true
-            }
-            return false
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun setupWebView(url: String, githubDialog: Dialog): WebView {
+        val webView = WebView(requireContext())
+        webView.isVerticalScrollBarEnabled = false
+        webView.isHorizontalScrollBarEnabled = false
+        webView.webViewClient = GithubWebViewClient(githubDialog) { code ->
+            viewModel.getAuthToken(code)
         }
-
-        private fun handleUrl(url: String) {
-            val uri = Uri.parse(url)
-            if (url.contains("code")) {
-                val githubCode = uri.getQueryParameter("code") ?: ""
-                viewModel.getAuthToken(githubCode)
-            }
-        }
+        webView.settings.javaScriptEnabled = true
+        webView.loadUrl(url)
+        return webView
     }
 }

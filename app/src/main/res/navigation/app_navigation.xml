@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_authentication">
         <action
             android:id="@+id/action_loginFragment_to_followingFragment"
-            app:destination="@id/followingFragment"
+            app:destination="@id/followersFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -20,12 +20,12 @@
     </fragment>
 
     <fragment
-        android:id="@+id/followingFragment"
+        android:id="@+id/followersFragment"
         android:name="com.vinicius.githubexplorerapp.presentation.followers.FollowersFragment"
-        android:label="fragment_following"
+        android:label="fragment_followers"
         tools:layout="@layout/fragment_followers">
         <action
-            android:id="@+id/action_followingFragment_to_repositoriesFragment"
+            android:id="@+id/action_followersFragment_to_repositoriesFragment"
             app:destination="@id/repositoriesFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -35,9 +35,12 @@
 
     <fragment
         android:id="@+id/repositoriesFragment"
-        android:name="com.vinicius.githubexplorerapp.presentation.followers.RepositoriesFragment"
+        android:name="com.vinicius.githubexplorerapp.presentation.followers.followerRepos.FollowerReposFragment"
         android:label="fragment_repositories"
-        tools:layout="@layout/fragment_followers_repositories">
+        tools:layout="@layout/fragment_follower_repos">
+        <argument
+            android:name="followerUser"
+            app:argType="com.vinicius.githubexplorerapp.domain.model.UserFollower"/>
     </fragment>
 
     <fragment

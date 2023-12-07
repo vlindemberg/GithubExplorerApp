@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupFragmentsNavigation(it: MenuItem): Boolean {
         when (it.itemId) {
-            R.id.following -> navController.navigate(R.id.followingFragment)
+            R.id.following -> navController.navigate(R.id.followersFragment)
             R.id.repositories -> navController.navigate(R.id.myRepositoriesFragment)
             R.id.profile -> navController.navigate(R.id.profileFragment)
             else -> {}

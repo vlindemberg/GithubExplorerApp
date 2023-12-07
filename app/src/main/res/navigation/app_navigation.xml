@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/myRepositoriesFragment"
-        android:name="com.vinicius.githubexplorerapp.presentation.myRepositories.MyRepositoriesFragment"
+        android:name="com.vinicius.githubexplorerapp.presentation.myRepositories.MyReposFragment"
         android:label="fragment_my_repositories"
         tools:layout="@layout/fragment_my_repositories">
     </fragment>

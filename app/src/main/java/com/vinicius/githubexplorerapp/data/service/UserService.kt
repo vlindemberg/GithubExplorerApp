@@ -9,17 +9,24 @@ import retrofit2.http.Path
 
 interface UserService {
     @GET("user")
-    suspend fun getUserInfo(@Header("Authorization") token: String): UserResponse
+    suspend fun getUserInfo(
+        @Header("Authorization") token: String,
+    ): UserResponse
+
+    @GET("user/repos")
+    suspend fun getUserRepos(
+        @Header("Authorization") token: String,
+    ): List<UserRepoResponse>
 
     @GET("users/{username}/following")
     suspend fun getUserFollowers(
         @Header("Authorization") token: String,
-        @Path("username") username: String
+        @Path("username") username: String,
     ): List<UserFollowersResponse>
 
-    @GET("/users/{username}/repos")
-    suspend fun getUserRepos(
+    @GET("users/{username}/repos")
+    suspend fun getFollowerUserRepos(
         @Header("Authorization") token: String,
-        @Path("username") username: String
+        @Path("username") username: String,
     ): List<UserRepoResponse>
 }

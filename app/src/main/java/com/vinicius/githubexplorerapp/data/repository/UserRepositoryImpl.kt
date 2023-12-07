@@ -17,13 +17,17 @@ class UserRepositoryImpl @Inject constructor(
         token: String
     ): User = userRemoteDataSource.getUser(token).toUser()
 
+    override suspend fun getUserRepos(
+        token: String
+    ): List<UserRepo> = userRemoteDataSource.getUserRepos(token).toUserRepos()
+
     override suspend fun getUserFollowers(
         token: String,
         username: String
     ): List<UserFollower> = userRemoteDataSource.getUserFollowers(token, username).toUserFollowers()
 
-    override suspend fun getUserRepos(
+    override suspend fun getFollowerUserRepos(
         token: String,
         username: String
-    ): List<UserRepo> = userRemoteDataSource.getUserRepos(token, username).toUserRepos()
+    ): List<UserRepo> = userRemoteDataSource.getFollowerUserRepos(token, username).toUserRepos()
 }

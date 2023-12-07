@@ -75,9 +75,9 @@ class FollowerReposFragment : Fragment() {
 
     private fun setupLoading(loading: Boolean) {
         if (loading) {
-            binding.followerRepoProgress.visibility = View.VISIBLE
+            binding.followerReposProgress.visibility = View.VISIBLE
         } else {
-            binding.followerRepoProgress.visibility = View.GONE
+            binding.followerReposProgress.visibility = View.GONE
         }
     }
 

@@ -76,7 +76,7 @@ data class UserRepoResponse(
     @SerializedName("has_wiki")
     val hasWiki: Boolean,
     @SerializedName("homepage")
-    val homepage: Any,
+    val homepage: String?,
     @SerializedName("hooks_url")
     val hooksUrl: String,
     @SerializedName("html_url")

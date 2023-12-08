@@ -12,4 +12,7 @@
     <string name="back_button">Voltar a Pagina</string>
     <string name="my_repositories">Meus repositórios</string>
     <string name="create_repo">Criar repositório</string>
+    <string name="close_bottom_sheet">Close Bottom Sheet</string>
+    <string name="bottom_sheet_title">Dê um nome ao seu repositório</string>
+    <string name="create_repo_button">Criar</string>
 </resources>

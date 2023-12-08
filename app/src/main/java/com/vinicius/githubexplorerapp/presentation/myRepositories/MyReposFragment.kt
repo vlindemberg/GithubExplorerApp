@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.vinicius.githubexplorerapp.R
 import com.vinicius.githubexplorerapp.databinding.FragmentMyRepositoriesBinding
 import com.vinicius.githubexplorerapp.domain.model.UserRepo
 import com.vinicius.githubexplorerapp.presentation.myRepositories.adapter.MyReposAdapter
@@ -40,7 +42,7 @@ class MyReposFragment : Fragment() {
 
     private fun setupObservables() {
         binding.btnCreateRepo.setOnClickListener {
-            //TODO impl bottom sheet
+            showCreateRepoBottomSheet()
         }
         lifecycleScope.launch {
             viewModel.userReposStates.collect {
@@ -48,6 +50,22 @@ class MyReposFragment : Fragment() {
                 loadUserRepos(it.reposList)
                 loadError(it.errorMessage)
             }
+        }
+    }
+
+    private fun showCreateRepoBottomSheet() {
+        val bottomSheetFragment = CreateRepoBottomSheetFragment { repo ->
+            viewModel.createRepo(UserLogged.getAuthToken(), repo)
+        }
+        bottomSheetFragment.setStyle(
+            DialogFragment.STYLE_NORMAL,
+            R.style.FullScreenBottomSheetDialogTheme
+        )
+        activity?.supportFragmentManager?.let {
+            bottomSheetFragment.show(
+                it,
+                bottomSheetFragment.tag
+            )
         }
     }
 

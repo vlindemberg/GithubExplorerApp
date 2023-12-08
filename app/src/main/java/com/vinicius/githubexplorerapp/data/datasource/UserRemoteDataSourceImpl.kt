@@ -4,6 +4,8 @@ import com.vinicius.githubexplorerapp.data.model.UserFollowersResponse
 import com.vinicius.githubexplorerapp.data.model.UserRepoResponse
 import com.vinicius.githubexplorerapp.data.model.UserResponse
 import com.vinicius.githubexplorerapp.data.service.UserService
+import com.vinicius.githubexplorerapp.domain.extensions.toUserRepoRequest
+import com.vinicius.githubexplorerapp.domain.model.UserRepo
 import javax.inject.Inject
 
 class UserRemoteDataSourceImpl @Inject constructor(
@@ -16,6 +18,12 @@ class UserRemoteDataSourceImpl @Inject constructor(
     override suspend fun getUserRepos(
         token: String
     ): List<UserRepoResponse> = userService.getUserRepos(token)
+
+    override suspend fun createUserRepo(
+        token: String,
+        repo: UserRepo
+    ): UserRepoResponse =
+        userService.createUserRepo(token, repo.toUserRepoRequest())
 
     override suspend fun getUserFollowers(
         token: String,

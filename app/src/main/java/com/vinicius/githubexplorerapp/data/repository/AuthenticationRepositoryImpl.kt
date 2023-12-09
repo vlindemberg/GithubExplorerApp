@@ -10,16 +10,13 @@ class AuthenticationRepositoryImpl @Inject constructor(
     private val authenticationRemoteDataSource: AuthenticationRemoteDataSource
 ) : AuthenticationRepository {
     override suspend fun getAuthToken(
-        clientId: String,
-        clientSecret: String,
-        code: String,
-        redirectUri: String
+        clientId: String, clientSecret: String, code: String, redirectUri: String
     ): Token {
         return authenticationRemoteDataSource.getAuthToken(
-            clientId,
-            clientSecret,
-            code,
-            redirectUri
+            clientId, clientSecret, code, redirectUri
         ).toToken()
     }
+
+    override suspend fun deleteAuthToken(tokenBearer: String, clientId: String, token: String): Any =
+        authenticationRemoteDataSource.deleteAuthToken(tokenBearer, clientId, token)
 }

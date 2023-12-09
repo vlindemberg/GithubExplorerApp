@@ -9,4 +9,10 @@ interface AuthenticationRemoteDataSource {
         code: String,
         redirectUri: String
     ): AuthTokenResponse
+
+    suspend fun deleteAuthToken(
+        tokenBearer: String,
+        clientId: String,
+        token: String
+    ): Any
 }

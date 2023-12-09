@@ -9,4 +9,10 @@ interface AuthenticationRepository {
         code: String,
         redirectUri: String
     ): Token
+
+    suspend fun deleteAuthToken(
+        tokenBearer: String,
+        clientId: String,
+        token: String,
+    ): Any
 }

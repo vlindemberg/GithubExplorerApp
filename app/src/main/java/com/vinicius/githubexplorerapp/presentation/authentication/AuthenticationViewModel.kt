@@ -31,6 +31,7 @@ class AuthenticationViewModel @Inject constructor(
                 getAuthTokenUseCase(code)
             }.onSuccess { token ->
                 UserLogged.setAuthToken(token.type + " " + token.token)
+                UserLogged.setAuthTokenWithoutBearer(token.token)
                 _authStates.update {
                     AuthenticationState(
                         isLoading = false,

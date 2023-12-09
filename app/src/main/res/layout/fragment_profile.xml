@@ -29,20 +29,39 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_img"
         tools:text="Vinícius Azevedo" />
 
-    <Button
-        android:id="@+id/btn_logout"
+    <RelativeLayout
+        android:id="@+id/rlButton"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="16dp"
         android:layout_marginHorizontal="100dp"
-        android:background="@drawable/rounded_shape"
-        android:fontFamily="@font/rubik_bold"
-        android:text="@string/profile_logout"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_name">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_shape"
+            android:fontFamily="@font/rubik_bold"
+            android:text="@string/profile_logout"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/logout_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="16dp"
+            android:elevation="10dp"
+            android:indeterminateTint="@color/black"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

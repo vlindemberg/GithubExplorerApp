@@ -4,6 +4,7 @@ import com.vinicius.githubexplorerapp.domain.model.User
 
 object UserLogged {
     private var authToken: String = ""
+    private var authTokenWithoutBearer: String = ""
     private lateinit var user: User
 
     fun setAuthToken(token: String) {
@@ -12,6 +13,14 @@ object UserLogged {
 
     fun getAuthToken(): String {
         return authToken
+    }
+
+    fun setAuthTokenWithoutBearer(tokenWithoutBearer: String) {
+        authTokenWithoutBearer = tokenWithoutBearer
+    }
+
+    fun getAuthTokenWithoutBearer(): String {
+        return authTokenWithoutBearer
     }
 
     fun setUserLogged(userLogged: User) {

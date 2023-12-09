@@ -78,6 +78,8 @@ dependencies {
     testImplementation(libs.mock)
     testImplementation(libs.mockk.android)
     testImplementation(libs.core.testing)
+    testImplementation(libs.turbine)
+    testImplementation(libs.mockito.inline)
 
     implementation(libs.fragment.ktx)
     implementation(libs.hilt.android)
